@@ -159,8 +159,8 @@ const logoutCustomer = async (req, res) => {
   try {
     res.clearCookie('token', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+      secure: true,      // Mandatory for cross-domain HTTPS
+      sameSite: 'none',  // Must match the cookie options set in generateToken
     });
 
     return res.status(200).json({
